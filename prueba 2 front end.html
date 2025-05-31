@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Formulario para registrarse</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;}
+    .form-container {
+      background-color: #1e1e1e;
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);}
+
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #00bcd4;}
+
+    .form-group {
+      margin-bottom: 15px;}
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #cccccc;}
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #2a2a2a;
+      color: #ffffff;}
+
+    input:focus, select:focus {
+      outline: none;
+      border: 2px solid #00bcd4;}
+
+    .form-buttons {
+      display: flex;
+      justify-content: space-between;}
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #00bcd4;
+      color: #ffffff;
+      cursor: pointer;}
+    button:hover {
+      background-color: #008c9e;}
+
+  </style>
+</head>
+<body>
+  <script>
+    window.onload = function(){
+      const form = document.getElementById("formularioRegistro" );
+      const nombre = document.getElementById( " nombre");
+      const rut = document.getElementById(" rut" );
+      const genero = document.getElementById("genero ");
+      const password = document.getElementById("password");
+      const repetirPassword = document.getElementById("repetirPassword");
+
+      form.addEventListener("submit",function(event){
+        event.preventDefault(); 
+
+        let errores = [];
+
+        if (nombre.value.trim() === "") {
+          errores.push("El nombre no puede estar vacío.");
+        }
+
+        if (!/^\d{1,2}\.?\d{3}\.?\d{3}-[\dkK]$/.test(rut.value.trim())) {
+          errores.push("El RUT no tiene un formato válido.");
+        }
+
+        if (genero.value === "") {
+          errores.push("Debe seleccionar un género.");
+        }
+
+        if (password.value !== repetirPassword.value) {
+          errores.push("Las contraseñas no coinciden.");
+        }
+
+        if (errores.length > 0) {
+          alert("Errores:\n" + errores.join("\n"));
+        } else {
+          alert("Formulario válido. ¡Datos listos para enviar!");
+        }
+      });
+    };
+  </script>
+
+  <div class="form-container">
+    <h3>Formulario de Registro</h3>
+    <form id="formularioRegistro">
+      <div class="form-group">
+        <label for="nombre">Nombre Completo</label>
+        <input type="text" id="nombre" required>
+      </div>
+      <div class="form-group">
+        <label for="rut">rut</label>
+        <input type="text" id="rut" placeholder="Ej: 12.345.678-9" required>
+      </div>
+      <div class="form-group">
+        <label for="fecha">Mi fecha de nacimiento</label>
+        <input type="date" id="fecha" required>
+      </div>
+      <div class="form-group">
+        <label for="email">correo electrónico</label>
+        <input type="email" id="email" placeholder="nombre@correo.com" required>
+      </div>
+      <div class="form-group">
+        <label for="genero">genero</label>
+        <select id="genero" required>
+          <option value="">seleccionar</option>
+          <option value="masculino">masculino</option>
+          <option value="femenino">femenino</option>
+          <option value="otro">otro</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="cv">curriculum vitaee</label>
+        <input type="file" id="cv">
+      </div>
+      <div class="form-group">
+        <label for="password">contraseña</label>
+        <input type="password" id="password" required>
+      </div>
+
+      <div class="form-group">
+        <label for="repetirPassword">repita la contraseña</label>
+        <input type="password" id="repetirPassword" required>
+      </div>
+
+      <div class="form-buttons">
+        <button type="reset">Cancelar</button>
+        <button type="submit" id="btnFormularioRegistro">guardar</button>
+      </div>
+    </form>
+  </div>
+
+</body>
+</html>
+
